@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vaultana/constants/constants.dart';
 
 class Loginscreen extends StatefulWidget {
   const Loginscreen({super.key});
@@ -12,6 +13,7 @@ class _LoginscreenState extends State<Loginscreen> {
   final _formKey = GlobalKey<FormState>();
   bool _isPasswordVisible = false;
   final String hardCodePassword ="123456@";
+  bool _showForgetPassword = false;
 
   final TextEditingController passwordController = TextEditingController();
 
@@ -19,11 +21,6 @@ class _LoginscreenState extends State<Loginscreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.blue,
-        title: const Text("Login"),
-        centerTitle: true,
-      ),
       body: Padding(
         padding: const EdgeInsetsGeometry.all(20.0),
         child: Form(
@@ -33,18 +30,18 @@ class _LoginscreenState extends State<Loginscreen> {
             children: [
 
               //logo
-              Icon(
-                Icons.flutter_dash_outlined,
-                color: Colors.blue,
-                size: 300,
+              Hero(
+                tag: "logo",
+                child: Icon(
+                  Icons.flutter_dash_outlined,
+                  color: Colors.blue,
+                  size: 200,
+                ),
               ),
 
               Text(
                 "VAULTANA",
-                style: TextStyle(
-                  fontSize: 18.0,
-                  color: Colors.blue
-                ),
+                style: kLogoNameStyle
               ),
 
               SizedBox(height: 24.0,),
@@ -92,6 +89,9 @@ class _LoginscreenState extends State<Loginscreen> {
                     );
                   }
                   else{
+                    setState(() {
+                      _showForgetPassword= true;
+                    });
                     ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text(
@@ -101,14 +101,34 @@ class _LoginscreenState extends State<Loginscreen> {
                             ),
                           ),
                           backgroundColor: Colors.pinkAccent,
-
-
                         )
                     );
                   }
                 },
-                child: const Text("Login"),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                ),
+                child: Text(
+                  "Login",
+                  style: kButtonTextStyle ,
+
+                ),
               ),
+
+              SizedBox(height: 5.0),
+              
+              if(_showForgetPassword)
+                TextButton(
+                    onPressed: (){}, 
+                    child: Text("Forget Password?"))
+
+
+
+
 
 
 

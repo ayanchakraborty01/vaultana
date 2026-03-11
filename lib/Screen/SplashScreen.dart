@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:vaultana/Screen/LoginScreen.dart';
+import 'package:vaultana/Screen/HomeScreen.dart';
 
 class Splashscreen extends StatefulWidget {
   const Splashscreen({super.key});
@@ -13,7 +13,6 @@ class _SplashscreenState extends State<Splashscreen> {
   
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _initApp();
   }
@@ -23,7 +22,7 @@ class _SplashscreenState extends State<Splashscreen> {
 
     Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context)=> Loginscreen()));
+        MaterialPageRoute(builder: (context)=> Homescreen()));
   }
 
   @override
@@ -34,7 +33,15 @@ class _SplashscreenState extends State<Splashscreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.flutter_dash_outlined,size:100,color: Colors.blue),
+            Hero(
+              tag: "Logo",
+              child: Icon(
+                  Icons.flutter_dash_outlined,
+                  size:100,
+                  color: Colors.blue
+              ),
+            ),
+
             SizedBox(height:20),
             Text(
               "Vaultana",
